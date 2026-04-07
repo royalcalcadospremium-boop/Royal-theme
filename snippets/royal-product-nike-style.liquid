@@ -1,25 +1,21 @@
 {%- comment -%}
 ═══════════════════════════════════════════════════════════
   ROYAL PRODUCT — ESTILO NIKE
-  CSS Override global para a página de produto.
-  Incluir via {% render 'royal-product-nike-style' %} 
-  no product-template.liquid ou theme.liquid.
+  v2.0 — Botão flutuante pill, esconde quando raiz visível,
+         sem WhatsApp, sem parcelas, info antes da foto (mobile)
 ═══════════════════════════════════════════════════════════
 {%- endcomment -%}
 
 <style>
 /* ═══════════════════════════════════════════════════════
-   1. RESET & LAYOUT GLOBAL — PRODUTO
+   1. RESET & LAYOUT GLOBAL
    ═══════════════════════════════════════════════════════ */
-
-/* Fundo branco limpo */
 [data-section-type="product"],
 [data-section-type="product"] .container {
   background: #ffffff !important;
   max-width: 100% !important;
 }
 
-/* Remove bordas e sombras dos cards internos */
 [data-section-type="product"] .card {
   border: none !important;
   box-shadow: none !important;
@@ -32,13 +28,40 @@
   margin: 16px 0 !important;
 }
 
-/* Container mais limpo */
 [data-section-type="product"] .container--flush {
   padding: 0 !important;
 }
 
 /* ═══════════════════════════════════════════════════════
-   2. BREADCRUMB — mais sutil
+   2. ESCONDER ELEMENTOS INDESEJADOS
+   ═══════════════════════════════════════════════════════ */
+
+/* WhatsApp Share — ESCONDIDO */
+.rc-badge-slot,
+.rc-after-title,
+.rc-share-badge,
+#rc-whats-anchor + .rc-badge-slot {
+  display: none !important;
+}
+
+/* Parcelas "ou 12x de R$..." — ESCONDIDO */
+[data-section-type="product"] .product-form__info-content > p[style*="font-size:16px"],
+[data-section-type="product"] .product-form__info-content > p[style*="font-size: 16px"] {
+  display: none !important;
+}
+
+/* Label de desconto "R$ X de desconto" — ESCONDIDO */
+[data-section-type="product"] .product-meta__label-list {
+  display: none !important;
+}
+
+/* Botão "Adicionar ao carrinho" extra (secondary) — ESCONDIDO */
+[data-section-type="product"] .button--primary-add {
+  display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   3. BREADCRUMB
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .breadcrumb {
   padding: 12px 20px !important;
@@ -69,7 +92,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   3. LAYOUT PRODUTO — Side-by-side em desktop, stack no mobile
+   4. LAYOUT: Info antes da foto no mobile (Nike style)
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .product-block-list {
   padding: 0 !important;
@@ -81,14 +104,13 @@
   gap: 0 !important;
 }
 
-/* Galeria */
+/* Desktop */
 [data-section-type="product"] .product-block-list__item--gallery {
   flex: 1 1 55% !important;
   max-width: 55% !important;
   padding: 0 !important;
 }
 
-/* Info */
 [data-section-type="product"] .product-block-list__item--info {
   flex: 1 1 45% !important;
   max-width: 45% !important;
@@ -98,7 +120,7 @@
   align-self: flex-start !important;
 }
 
-/* Description, reviews, etc — full width below */
+/* Demais blocos — full width */
 [data-section-type="product"] .product-block-list__item--description,
 [data-section-type="product"] .product-block-list__item--reviews,
 [data-section-type="product"] .product-block-list__item--trust,
@@ -110,7 +132,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   4. GALERIA DE IMAGENS — Nike style
+   5. GALERIA
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .product-gallery {
   border: none !important;
@@ -122,11 +144,6 @@
 [data-section-type="product"] .product-gallery img {
   border-radius: 0 !important;
   object-fit: cover !important;
-}
-
-/* Thumbnails */
-[data-section-type="product"] .product-gallery__thumbnail-list {
-  gap: 4px !important;
 }
 
 [data-section-type="product"] .product-gallery__thumbnail {
@@ -142,13 +159,12 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   5. PRODUCT META — Título, vendedor, avaliações
+   6. PRODUCT META — Título, avaliações
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .product-meta {
   padding: 0 !important;
 }
 
-/* Título do produto — Nike style */
 [data-section-type="product"] .product-meta__title {
   font-size: 28px !important;
   font-weight: 500 !important;
@@ -159,7 +175,6 @@
   text-transform: none !important;
 }
 
-/* Subtítulo / vendedor / categoria */
 [data-section-type="product"] .product-meta__vendor,
 [data-section-type="product"] .product-meta__reference {
   font-size: 16px !important;
@@ -168,14 +183,6 @@
   margin-bottom: 8px !important;
 }
 
-/* SKU / Código */
-[data-section-type="product"] .product-meta__sku,
-[data-section-type="product"] .product-meta__sku-number {
-  font-size: 13px !important;
-  color: #707072 !important;
-}
-
-/* Quantidade vendidos */
 [data-section-type="product"] .quantitysell {
   font-size: 13px !important;
   color: #707072 !important;
@@ -183,7 +190,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   6. PREÇOS — Estilo Nike
+   7. PREÇOS — Nike
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .product-form__info-list {
   padding: 0 !important;
@@ -220,7 +227,6 @@
   text-decoration: line-through !important;
 }
 
-/* Porcentagem de desconto — verde estilo Nike */
 [data-section-type="product"] .discount__percentage {
   background: none !important;
   border: none !important;
@@ -244,30 +250,8 @@
   flex-wrap: nowrap !important;
 }
 
-/* Labels de desconto */
-[data-section-type="product"] .product-label--on-sale {
-  background: transparent !important;
-  color: #4a8c1c !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-}
-
-[data-section-type="product"] .product-meta__label-list {
-  margin: 0 !important;
-}
-
-/* Parcelas */
-[data-section-type="product"] .product-form__info-content > p {
-  font-size: 14px !important;
-  color: #707072 !important;
-  margin-top: 2px !important;
-  margin-bottom: 12px !important;
-}
-
 /* ═══════════════════════════════════════════════════════
-   7. SELETOR DE VARIANTES — Botões estilo Nike
+   8. SELETOR DE VARIANTES
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .product-form__variants {
   margin: 16px 0 !important;
@@ -290,15 +274,10 @@
   color: #707072 !important;
 }
 
-/* Block swatch — tamanho estilo Nike */
 [data-section-type="product"] .block-swatch-list {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
   gap: 8px !important;
-}
-
-[data-section-type="product"] .block-swatch {
-  width: 100% !important;
 }
 
 [data-section-type="product"] .block-swatch__item {
@@ -327,16 +306,10 @@
   font-weight: 500 !important;
 }
 
-/* Variante sold out */
 [data-section-type="product"] .block-swatch__radio:disabled + .block-swatch__item {
   opacity: 0.4 !important;
   cursor: not-allowed !important;
   text-decoration: line-through !important;
-}
-
-/* Color swatch */
-[data-section-type="product"] .color-swatch-list {
-  gap: 8px !important;
 }
 
 [data-section-type="product"] .color-swatch__item {
@@ -353,7 +326,6 @@
   outline-color: #111111 !important;
 }
 
-/* Variant image swatch */
 [data-section-type="product"] .variant-swatch__item {
   border: 2px solid transparent !important;
   border-radius: 8px !important;
@@ -365,7 +337,6 @@
   border-color: #111111 !important;
 }
 
-/* Select dropdown fallback */
 [data-section-type="product"] .select-wrapper--primary {
   border: 1.5px solid #cacacb !important;
   border-radius: 8px !important;
@@ -373,7 +344,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   8. BOTÃO "ADICIONAR AO CARRINHO" — Estilo Nike
+   9. BOTÃO RAIZ "COMPRAR AGORA" — Pill preto Nike
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .product-form__add-button,
 [data-section-type="product"] .product-form__payment-container .button--primary {
@@ -394,27 +365,11 @@
   margin-bottom: 12px !important;
 }
 
-[data-section-type="product"] .product-form__add-button:hover,
-[data-section-type="product"] .product-form__payment-container .button--primary:hover {
+[data-section-type="product"] .product-form__add-button:hover {
   background: #111111 !important;
   opacity: 0.8 !important;
 }
 
-/* Botão secundário (ex.: Adicionar ao carrinho adicional) */
-[data-section-type="product"] .button--primary-add {
-  background: #ffffff !important;
-  color: #111111 !important;
-  border: 1.5px solid #cacacb !important;
-  border-radius: 30px !important;
-}
-
-[data-section-type="product"] .button--primary-add:hover {
-  border-color: #111111 !important;
-  background: #ffffff !important;
-  opacity: 1 !important;
-}
-
-/* Botão sold out */
 [data-section-type="product"] .button--disabled {
   background: #e5e5e5 !important;
   color: #707072 !important;
@@ -423,30 +378,40 @@
   cursor: not-allowed !important;
 }
 
-/* Shopify dynamic checkout buttons */
 [data-section-type="product"] .shopify-payment-button__button {
   border-radius: 30px !important;
   overflow: hidden !important;
 }
 
 /* ═══════════════════════════════════════════════════════
-   9. BOTÃO FLUTUANTE (STICKY BOTTOM BAR) — Nike
+   10. BOTÃO FLUTUANTE — Pill sem bloco branco, mesmo estilo
    ═══════════════════════════════════════════════════════ */
 .botaoflutuante {
   position: fixed !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
   z-index: 999 !important;
-  background: #ffffff !important;
-  padding: 12px 20px !important;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08) !important;
-  border-top: 1px solid #e5e5e5 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-top: none !important;
+  width: auto !important;
+  max-width: 90vw !important;
+  pointer-events: none !important;
+  transition: opacity 0.3s ease, transform 0.3s ease !important;
+}
+
+.botaoflutuante.is-hidden {
+  opacity: 0 !important;
+  transform: translateX(-50%) translateY(20px) !important;
+  pointer-events: none !important;
 }
 
 .botaoflutuante #clicar {
-  display: block !important;
-  width: 100% !important;
+  display: inline-block !important;
   background: #111111 !important;
   color: #ffffff !important;
   border: none !important;
@@ -454,14 +419,24 @@
   font-size: 16px !important;
   font-weight: 500 !important;
   text-transform: none !important;
-  padding: 16px 24px !important;
+  padding: 16px 48px !important;
   text-align: center !important;
   letter-spacing: 0 !important;
   cursor: pointer !important;
+  pointer-events: auto !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.botaoflutuante #clicar:hover {
+  opacity: 0.85 !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35) !important;
 }
 
 /* ═══════════════════════════════════════════════════════
-   10. CARDS DE CONTEÚDO — Descrição, Tabs, etc.
+   11. CARDS DE CONTEÚDO
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .card__title {
   font-size: 20px !important;
@@ -491,7 +466,6 @@
   padding: 0 0 20px !important;
 }
 
-/* Expandable content */
 [data-section-type="product"] .expandable-content__toggle {
   color: #111111 !important;
   font-weight: 500 !important;
@@ -500,13 +474,12 @@
   margin-top: 8px !important;
 }
 
-/* Plus button */
 [data-section-type="product"] .plus-button {
   border-color: #111111 !important;
 }
 
 /* ═══════════════════════════════════════════════════════
-   11. SEÇÃO DE FRETE — Clean
+   12. FRETE
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .shipping-estimator .form__field--text {
   border: 1.5px solid #cacacb !important;
@@ -524,7 +497,6 @@
   text-transform: none !important;
 }
 
-/* Frete customizado */
 [data-section-type="product"] .fretefundo {
   border: 1px solid #e5e5e5 !important;
   border-radius: 12px !important;
@@ -534,7 +506,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   12. BADGES (Devolução, Garantia, Mais vendido)
+   13. BADGES
    ═══════════════════════════════════════════════════════ */
 #badges-product {
   margin-top: 12px !important;
@@ -566,7 +538,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   13. PIX BADGE
+   14. PIX
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .product-form__info-content > span[style*="border-radius: 21px"] {
   background: #f0f7ff !important;
@@ -582,7 +554,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   14. SEÇÃO DE PAGAMENTO / TRUST BADGES
+   15. PAGAMENTO / TRUST
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .payment-list {
   gap: 8px !important;
@@ -592,7 +564,6 @@
 
 [data-section-type="product"] .payment-list__item {
   opacity: 0.7 !important;
-  transition: opacity 0.2s ease !important;
 }
 
 [data-section-type="product"] .payment-list__item:hover {
@@ -600,7 +571,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   15. RECOMMENDATIONS (Mais Vendidos)
+   16. RECOMMENDATIONS
    ═══════════════════════════════════════════════════════ */
 .product-recommendations .section__title,
 .product-recommendations .heading {
@@ -611,12 +582,11 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   16. QUANTIDADE SELECTOR — Clean
+   17. QUANTIDADE SELECTOR
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .qty-align {
   display: flex !important;
   align-items: center !important;
-  gap: 0 !important;
   border: 1.5px solid #cacacb !important;
   border-radius: 30px !important;
   overflow: hidden !important;
@@ -628,14 +598,10 @@
   background: transparent !important;
   border: none !important;
   font-size: 18px !important;
-  font-weight: 500 !important;
   color: #111111 !important;
   width: 44px !important;
   height: 44px !important;
   cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
 }
 
 [data-section-type="product"] .qty {
@@ -648,7 +614,6 @@
   background: transparent !important;
 }
 
-/* Olho / pessoas vendo o produto — mais sutil */
 [data-section-type="product"] .olho {
   background: #4a8c1c !important;
   width: 8px !important;
@@ -656,7 +621,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   17. AVALIAÇÕES
+   18. AVALIAÇÕES
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .spr-reviews,
 .lt-block-reviews,
@@ -664,45 +629,84 @@
   padding: 0 20px !important;
 }
 
-/* Estrelas — dourado padrão */
 [data-section-type="product"] .fas.fa-star {
   color: #111111 !important;
   font-size: 14px !important;
 }
 
 /* ═══════════════════════════════════════════════════════
-   18. WhatsApp Share Badge — mais sutil
+   19. TRUST BADGE AREA
    ═══════════════════════════════════════════════════════ */
-.rc-share-badge {
-  background: #ffffff !important;
-  color: #111111 !important;
-  border: 1.5px solid #cacacb !important;
-  border-radius: 30px !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  height: 44px !important;
-  padding: 0 20px !important;
+[data-section-type="product"] .product-block-list__item--trust .card__header--flex {
+  border-bottom: 1px solid #e5e5e5 !important;
+  padding-bottom: 16px !important;
 }
 
-.rc-share-badge:hover {
-  border-color: #111111 !important;
+[data-section-type="product"] .product__trust-badge {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+[data-section-type="product"] .product-form__payment-container {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+[data-section-type="product"] .product-form__info-item--quantity.qty-margin-top {
+  margin-top: 12px !important;
+}
+
+/* Scrollbar sutil */
+[data-section-type="product"] .card--sticky::-webkit-scrollbar {
+  width: 4px !important;
+}
+[data-section-type="product"] .card--sticky::-webkit-scrollbar-thumb {
+  background: #cacacb !important;
+  border-radius: 4px !important;
 }
 
 /* ═══════════════════════════════════════════════════════
-   19. MOBILE — Responsivo
+   20. MOBILE — Info ANTES da foto (como Nike)
    ═══════════════════════════════════════════════════════ */
 @media (max-width: 999px) {
-  /* Stack vertical no mobile */
-  [data-section-type="product"] .product-block-list__item--gallery,
+  /* Reordenar: info primeiro, foto depois */
+  [data-section-type="product"] .product-block-list__wrapper {
+    flex-direction: column !important;
+  }
+
   [data-section-type="product"] .product-block-list__item--info {
+    order: 1 !important;
     flex: 1 1 100% !important;
     max-width: 100% !important;
     position: relative !important;
     top: auto !important;
+    padding: 16px 20px 0 !important;
   }
 
-  [data-section-type="product"] .product-block-list__item--info {
-    padding: 16px 20px 0 !important;
+  [data-section-type="product"] .product-block-list__item--gallery {
+    order: 2 !important;
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+  }
+
+  [data-section-type="product"] .product-block-list__item--description {
+    order: 3 !important;
+  }
+
+  [data-section-type="product"] .product-block-list__item--content {
+    order: 4 !important;
+  }
+
+  [data-section-type="product"] .product-block-list__item--reviews {
+    order: 5 !important;
+  }
+
+  [data-section-type="product"] .product-block-list__item--trust {
+    order: 6 !important;
+  }
+
+  [data-section-type="product"] .product-block-list__item--shipping {
+    order: 7 !important;
   }
 
   /* Título menor no mobile */
@@ -711,7 +715,7 @@
     line-height: 1.3 !important;
   }
 
-  /* Grid de tamanhos 4 colunas no mobile */
+  /* Grid de tamanhos */
   [data-section-type="product"] .block-swatch-list {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 6px !important;
@@ -723,14 +727,14 @@
     padding: 6px 8px !important;
   }
 
-  /* Botão ATC fullwidth no mobile */
+  /* Botão ATC */
   [data-section-type="product"] .product-form__add-button {
     height: 52px !important;
     line-height: 52px !important;
     font-size: 15px !important;
   }
 
-  /* Padding geral */
+  /* Padding */
   [data-section-type="product"] .product-block-list__item--description,
   [data-section-type="product"] .product-block-list__item--reviews,
   [data-section-type="product"] .product-block-list__item--trust,
@@ -739,19 +743,19 @@
     padding: 0 16px !important;
   }
 
-  /* Sticky bar */
+  /* Botão flutuante no mobile */
   .botaoflutuante {
-    padding: 10px 16px calc(10px + env(safe-area-inset-bottom)) !important;
+    bottom: calc(16px + env(safe-area-inset-bottom)) !important;
   }
 
   .botaoflutuante #clicar {
     font-size: 15px !important;
-    padding: 14px 20px !important;
+    padding: 14px 40px !important;
   }
 }
 
 /* ═══════════════════════════════════════════════════════
-   20. ANIMAÇÕES SUTIS — Premium feel
+   21. TRANSIÇÕES
    ═══════════════════════════════════════════════════════ */
 [data-section-type="product"] .block-swatch__item,
 [data-section-type="product"] .color-swatch__item,
@@ -760,41 +764,58 @@
 .botaoflutuante #clicar {
   transition: all 0.15s ease !important;
 }
-
-/* Fix para garantir que bandeiras de pagamento ficam dentro do grid */
-[data-section-type="product"] .product__trust-badge {
-  max-width: 100% !important;
-  height: auto !important;
-}
-
-/* Scrollbar sutil */
-[data-section-type="product"] .card--sticky::-webkit-scrollbar {
-  width: 4px !important;
-}
-
-[data-section-type="product"] .card--sticky::-webkit-scrollbar-track {
-  background: transparent !important;
-}
-
-[data-section-type="product"] .card--sticky::-webkit-scrollbar-thumb {
-  background: #cacacb !important;
-  border-radius: 4px !important;
-}
-
-/* Remove qualquer background extra */
-[data-section-type="product"] .product-form__payment-container {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Bandeiras de pagamento - área limpa */
-[data-section-type="product"] .product-block-list__item--trust .card__header--flex {
-  border-bottom: 1px solid #e5e5e5 !important;
-  padding-bottom: 16px !important;
-}
-
-/* Remoção de elementos visuais desnecessários para manter clean */
-[data-section-type="product"] .product-form__info-item--quantity.qty-margin-top {
-  margin-top: 12px !important;
-}
 </style>
+
+{%- comment -%}
+═══════════════════════════════════════════════════════════
+  JAVASCRIPT: Esconde o botão flutuante quando o botão
+  raiz do produto está visível na tela.
+═══════════════════════════════════════════════════════════
+{%- endcomment -%}
+<script>
+(function(){
+  'use strict';
+
+  function initFloatingToggle() {
+    var floatingBar = document.getElementById('scrollToTop');
+    if (!floatingBar) return;
+
+    // Encontra o botão raiz do produto (o ATC principal)
+    var mainBtn = document.querySelector('[data-section-type="product"] .product-form__add-button');
+    if (!mainBtn) return;
+
+    // IntersectionObserver: observa se o botão raiz está visível
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          // Botão raiz VISÍVEL → esconde o flutuante
+          floatingBar.classList.add('is-hidden');
+        } else {
+          // Botão raiz FORA DA TELA → mostra o flutuante
+          floatingBar.classList.remove('is-hidden');
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    });
+
+    observer.observe(mainBtn);
+  }
+
+  // Executa quando o DOM estiver pronto
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(initFloatingToggle, 500);
+    });
+  } else {
+    setTimeout(initFloatingToggle, 500);
+  }
+
+  // Suporte a Shopify section reload
+  document.addEventListener('shopify:section:load', function() {
+    setTimeout(initFloatingToggle, 500);
+  });
+})();
+</script>
