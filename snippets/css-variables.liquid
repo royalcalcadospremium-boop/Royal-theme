@@ -8,6 +8,11 @@
 
 {%- assign text_font_bolder_weight = 'bolder' -%}
 
+{%- comment -%}=== GOOGLE FONTS: Inter (estilo Nike/Helvetica Neue) ==={%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <link rel="preload" href="{{ settings.heading_font | font_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ heading_font_italic | font_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ settings.text_font | font_url }}" as="font" type="font/woff2" crossorigin>
@@ -53,13 +58,13 @@
   :root {
     --default-text-font-size : 15px;
     --base-text-font-size    : {{ settings.base_text_font_size }}px;
-    --heading-font-family    : {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
-    --heading-font-weight    : {{ settings.heading_font.weight }};
-    --heading-font-style     : {{ settings.heading_font.style }};
-    --text-font-family       : {{ settings.text_font.family }}, {{ settings.text_font.fallback_families }};
-    --text-font-weight       : {{ settings.text_font.weight }};
-    --text-font-style        : {{ settings.text_font.style }};
-    --text-font-bolder-weight: {{ text_font_bolder_weight }};
+    --heading-font-family    : 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --heading-font-weight    : 700;
+    --heading-font-style     : normal;
+    --text-font-family       : 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --text-font-weight       : 400;
+    --text-font-style        : normal;
+    --text-font-bolder-weight: 600;
     --text-link-decoration   : {% if settings.underline_links %}underline{% else %}normal{% endif %};
 
     --text-color               : {{ settings.text_color }};
@@ -125,6 +130,38 @@
 
     --mobile-container-gutter : 20px;
     --desktop-container-gutter: 40px;
+  }
+
+  /* ═══ OVERRIDE GLOBAL: Fonte Inter (estilo Nike) em TODO o tema ═══ */
+  html, body,
+  h1, h2, h3, h4, h5, h6,
+  p, a, span, div, li, ul, ol,
+  button, input, textarea, select,
+  .button, .btn,
+  .product-item__info, .product-item__title,
+  .collection-item__title,
+  .header, .nav-bar,
+  .footer, .announcement-bar,
+  .rte, .rte p, .rte h1, .rte h2, .rte h3, .rte h4,
+  .section__title, .section__header,
+  .product-meta, .product-meta__title,
+  .card, .card__title, .card__info {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Ajustes de peso para hierarquia limpa estilo Nike */
+  h1, .h1 { font-weight: 800 !important; letter-spacing: -0.02em; }
+  h2, .h2 { font-weight: 700 !important; letter-spacing: -0.01em; }
+  h3, .h3 { font-weight: 600 !important; }
+  h4, .h4, h5, .h5, h6, .h6 { font-weight: 600 !important; }
+  p, li, span, a { font-weight: 400; }
+  strong, b { font-weight: 700 !important; }
+  button, .button, .btn, input[type="submit"] {
+    font-weight: 600 !important;
+    letter-spacing: 0.02em;
   }
 </style>
 
