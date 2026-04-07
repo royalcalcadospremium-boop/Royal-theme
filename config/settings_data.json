@@ -409,7 +409,7 @@
         "settings": {
           "overlap_px": 0,
           "overlap_px_mobile": 0,
-          "show_announcement": true,
+          "show_announcement": false,
           "announcement_size_desktop": 20,
           "announcement_size_mobile": 20,
           "background1": "#3498db",
