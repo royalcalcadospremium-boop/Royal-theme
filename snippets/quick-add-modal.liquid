@@ -1,0 +1,17 @@
+<div id="quick-add-modal" class="quick-add-modal" hidden>
+  <div class="quick-add-modal__dialog" role="dialog" aria-modal="true">
+    <button type="button" class="quick-add-modal__close" data-action="close-size-picker">×</button>
+    <h3 class="quick-add-modal__title">Escolha sua numeração</h3>
+
+    <form class="quick-add-form" method="post" action="/cart/add">
+      <input type="hidden" name="id" value="">
+      <input type="hidden" name="quantity" value="1">
+
+      <div class="quick-add-sizes" data-role="sizes"></div>
+
+      <button type="submit" class="button button--primary button--small" data-role="submit" disabled>
+        Adicionar ao carrinho
+      </button>
+    </form>
+  </div>
+</div>
