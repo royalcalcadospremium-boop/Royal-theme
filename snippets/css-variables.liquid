@@ -8,10 +8,10 @@
 
 {%- assign text_font_bolder_weight = 'bolder' -%}
 
-{%- comment -%}=== GOOGLE FONTS: Inter (estilo Nike/Helvetica Neue) ==={%- endcomment -%}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+{%- comment -%}=== HELVETICA NEUE — Fonte personalizada (assets) ==={%- endcomment -%}
+<link rel="preload" href="{{ 'HelveticaNeueRoman.otf' | asset_url }}" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="{{ 'HelveticaNeueMedium.otf' | asset_url }}" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="{{ 'HelveticaNeueBold.otf' | asset_url }}" as="font" type="font/otf" crossorigin>
 
 <link rel="preload" href="{{ settings.heading_font | font_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ heading_font_italic | font_url }}" as="font" type="font/woff2" crossorigin>
@@ -38,30 +38,71 @@
     font-display: fallback;
   }
 
-  {{ settings.heading_font | font_face: font_display: 'fallback' }}
-  {{ settings.text_font | font_face: font_display: 'fallback' }}
-
-  {%- if text_font_semibold -%}
-    {{ text_font_semibold | font_face: font_display: 'fallback' }}
-    {%- assign text_font_bolder_weight = text_font_semibold.weight -%}
-  {%- elsif text_font_medium -%}
-    {{ text_font_medium | font_face: font_display: 'fallback' }}
-    {%- assign text_font_bolder_weight = text_font_medium.weight -%}
-  {%- endif -%}
-
-  {{ heading_font_italic | font_face: font_display: 'fallback' }}
-
-  {{ text_font_bold | font_face: font_display: 'fallback' }}
-  {{ text_font_italic | font_face: font_display: 'fallback' }}
-  {{ text_font_bold_italic | font_face: font_display: 'fallback' }}
+  /* ═══ @font-face: Helvetica Neue (todos os pesos) ═══ */
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src: url({{ 'HelveticaNeueLight.otf' | asset_url }}) format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src: url({{ 'HelveticaNeueRoman.otf' | asset_url }}) format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src: url({{ 'HelveticaNeueItalic.ttf' | asset_url }}) format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src: url({{ 'HelveticaNeueMedium.otf' | asset_url }}) format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src: url({{ 'HelveticaNeueBold.otf' | asset_url }}) format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src: url({{ 'HelveticaNeueBoldItalic.otf' | asset_url }}) format('opentype');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src: url({{ 'HelveticaNeueHeavy.otf' | asset_url }}) format('opentype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src: url({{ 'HelveticaNeueBlack.otf' | asset_url }}) format('opentype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
 
   :root {
     --default-text-font-size : 15px;
     --base-text-font-size    : {{ settings.base_text_font_size }}px;
-    --heading-font-family    : 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --heading-font-family    : 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --heading-font-weight    : 700;
     --heading-font-style     : normal;
-    --text-font-family       : 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --text-font-family       : 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --text-font-weight       : 400;
     --text-font-style        : normal;
     --text-font-bolder-weight: 600;
@@ -132,7 +173,7 @@
     --desktop-container-gutter: 40px;
   }
 
-  /* ═══ OVERRIDE GLOBAL: Fonte Inter (estilo Nike) em TODO o tema ═══ */
+  /* ═══ OVERRIDE GLOBAL: Fonte Helvetica Neue em TODO o tema ═══ */
   html, body,
   h1, h2, h3, h4, h5, h6,
   p, a, span, div, li, ul, ol,
@@ -146,7 +187,7 @@
   .section__title, .section__header,
   .product-meta, .product-meta__title,
   .card, .card__title, .card__info {
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
