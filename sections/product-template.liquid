@@ -17,6 +17,7 @@
 {%- endcapture -%}
  
 <section data-section-id="{{ section.id }}" data-section-type="product" data-section-settings='{{ section_settings }}'>
+  {% render 'royal-product-nike-style' %}
   {% render 'royal-overlap', id: section.id %}
 
   {%- if template != 'product.quick-view' -%}

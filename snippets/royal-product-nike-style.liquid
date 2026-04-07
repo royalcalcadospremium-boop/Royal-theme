@@ -1,0 +1,800 @@
+{%- comment -%}
+═══════════════════════════════════════════════════════════
+  ROYAL PRODUCT — ESTILO NIKE
+  CSS Override global para a página de produto.
+  Incluir via {% render 'royal-product-nike-style' %} 
+  no product-template.liquid ou theme.liquid.
+═══════════════════════════════════════════════════════════
+{%- endcomment -%}
+
+<style>
+/* ═══════════════════════════════════════════════════════
+   1. RESET & LAYOUT GLOBAL — PRODUTO
+   ═══════════════════════════════════════════════════════ */
+
+/* Fundo branco limpo */
+[data-section-type="product"],
+[data-section-type="product"] .container {
+  background: #ffffff !important;
+  max-width: 100% !important;
+}
+
+/* Remove bordas e sombras dos cards internos */
+[data-section-type="product"] .card {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+[data-section-type="product"] .card__separator {
+  border-color: #e5e5e5 !important;
+  margin: 16px 0 !important;
+}
+
+/* Container mais limpo */
+[data-section-type="product"] .container--flush {
+  padding: 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   2. BREADCRUMB — mais sutil
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .breadcrumb {
+  padding: 12px 20px !important;
+  font-size: 12px !important;
+  color: #707072 !important;
+  border-bottom: none !important;
+  background: transparent !important;
+}
+
+[data-section-type="product"] .breadcrumb__link {
+  color: #707072 !important;
+  text-decoration: none !important;
+  font-weight: 400 !important;
+}
+
+[data-section-type="product"] .breadcrumb__link:hover {
+  color: #111111 !important;
+  text-decoration: underline !important;
+}
+
+[data-section-type="product"] .page__sub-header {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+[data-section-type="product"] .page__navigation {
+  display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   3. LAYOUT PRODUTO — Side-by-side em desktop, stack no mobile
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .product-block-list {
+  padding: 0 !important;
+}
+
+[data-section-type="product"] .product-block-list__wrapper {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0 !important;
+}
+
+/* Galeria */
+[data-section-type="product"] .product-block-list__item--gallery {
+  flex: 1 1 55% !important;
+  max-width: 55% !important;
+  padding: 0 !important;
+}
+
+/* Info */
+[data-section-type="product"] .product-block-list__item--info {
+  flex: 1 1 45% !important;
+  max-width: 45% !important;
+  padding: 0 24px 0 32px !important;
+  position: sticky !important;
+  top: 80px !important;
+  align-self: flex-start !important;
+}
+
+/* Description, reviews, etc — full width below */
+[data-section-type="product"] .product-block-list__item--description,
+[data-section-type="product"] .product-block-list__item--reviews,
+[data-section-type="product"] .product-block-list__item--trust,
+[data-section-type="product"] .product-block-list__item--shipping,
+[data-section-type="product"] .product-block-list__item--content {
+  flex: 1 1 100% !important;
+  max-width: 100% !important;
+  padding: 0 20px !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   4. GALERIA DE IMAGENS — Nike style
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .product-gallery {
+  border: none !important;
+  border-radius: 0 !important;
+  background: #f5f5f5 !important;
+}
+
+[data-section-type="product"] .product-gallery__carousel-item img,
+[data-section-type="product"] .product-gallery img {
+  border-radius: 0 !important;
+  object-fit: cover !important;
+}
+
+/* Thumbnails */
+[data-section-type="product"] .product-gallery__thumbnail-list {
+  gap: 4px !important;
+}
+
+[data-section-type="product"] .product-gallery__thumbnail {
+  border: 2px solid transparent !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  transition: border-color 0.15s ease !important;
+}
+
+[data-section-type="product"] .product-gallery__thumbnail.is-selected,
+[data-section-type="product"] .product-gallery__thumbnail:hover {
+  border-color: #111111 !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   5. PRODUCT META — Título, vendedor, avaliações
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .product-meta {
+  padding: 0 !important;
+}
+
+/* Título do produto — Nike style */
+[data-section-type="product"] .product-meta__title {
+  font-size: 28px !important;
+  font-weight: 500 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.01em !important;
+  color: #111111 !important;
+  margin-bottom: 4px !important;
+  text-transform: none !important;
+}
+
+/* Subtítulo / vendedor / categoria */
+[data-section-type="product"] .product-meta__vendor,
+[data-section-type="product"] .product-meta__reference {
+  font-size: 16px !important;
+  color: #707072 !important;
+  font-weight: 400 !important;
+  margin-bottom: 8px !important;
+}
+
+/* SKU / Código */
+[data-section-type="product"] .product-meta__sku,
+[data-section-type="product"] .product-meta__sku-number {
+  font-size: 13px !important;
+  color: #707072 !important;
+}
+
+/* Quantidade vendidos */
+[data-section-type="product"] .quantitysell {
+  font-size: 13px !important;
+  color: #707072 !important;
+  font-weight: 400 !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   6. PREÇOS — Estilo Nike
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .product-form__info-list {
+  padding: 0 !important;
+  border: none !important;
+}
+
+[data-section-type="product"] .product-form__info-item {
+  padding: 0 !important;
+  border: none !important;
+  margin-bottom: 4px !important;
+}
+
+[data-section-type="product"] .product-form__info-title {
+  display: none !important;
+}
+
+[data-section-type="product"] .price-list {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: baseline !important;
+  gap: 8px !important;
+}
+
+[data-section-type="product"] .price--highlight {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  color: #111111 !important;
+}
+
+[data-section-type="product"] .price--compare {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  color: #707072 !important;
+  text-decoration: line-through !important;
+}
+
+/* Porcentagem de desconto — verde estilo Nike */
+[data-section-type="product"] .discount__percentage {
+  background: none !important;
+  border: none !important;
+  color: #4a8c1c !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+[data-section-type="product"] .discount__percentage svg {
+  color: #4a8c1c !important;
+  stroke: #4a8c1c !important;
+}
+
+[data-section-type="product"] .align-price-discount {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Labels de desconto */
+[data-section-type="product"] .product-label--on-sale {
+  background: transparent !important;
+  color: #4a8c1c !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+[data-section-type="product"] .product-meta__label-list {
+  margin: 0 !important;
+}
+
+/* Parcelas */
+[data-section-type="product"] .product-form__info-content > p {
+  font-size: 14px !important;
+  color: #707072 !important;
+  margin-top: 2px !important;
+  margin-bottom: 12px !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   7. SELETOR DE VARIANTES — Botões estilo Nike
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .product-form__variants {
+  margin: 16px 0 !important;
+}
+
+[data-section-type="product"] .product-form__option {
+  margin-bottom: 16px !important;
+}
+
+[data-section-type="product"] .product-form__option-name {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: #111111 !important;
+  margin-bottom: 12px !important;
+  display: block !important;
+}
+
+[data-section-type="product"] .product-form__selected-value {
+  font-weight: 400 !important;
+  color: #707072 !important;
+}
+
+/* Block swatch — tamanho estilo Nike */
+[data-section-type="product"] .block-swatch-list {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 8px !important;
+}
+
+[data-section-type="product"] .block-swatch {
+  width: 100% !important;
+}
+
+[data-section-type="product"] .block-swatch__item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+  border: 1.5px solid #cacacb !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  color: #111111 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  padding: 8px 12px !important;
+}
+
+[data-section-type="product"] .block-swatch__item:hover {
+  border-color: #111111 !important;
+}
+
+[data-section-type="product"] .block-swatch__radio:checked + .block-swatch__item {
+  border-color: #111111 !important;
+  border-width: 2px !important;
+  font-weight: 500 !important;
+}
+
+/* Variante sold out */
+[data-section-type="product"] .block-swatch__radio:disabled + .block-swatch__item {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+  text-decoration: line-through !important;
+}
+
+/* Color swatch */
+[data-section-type="product"] .color-swatch-list {
+  gap: 8px !important;
+}
+
+[data-section-type="product"] .color-swatch__item {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  border: 2px solid transparent !important;
+  outline: 2px solid transparent !important;
+  outline-offset: 2px !important;
+  transition: outline-color 0.15s ease !important;
+}
+
+[data-section-type="product"] .color-swatch__radio:checked + .color-swatch__item {
+  outline-color: #111111 !important;
+}
+
+/* Variant image swatch */
+[data-section-type="product"] .variant-swatch__item {
+  border: 2px solid transparent !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  transition: border-color 0.15s ease !important;
+}
+
+[data-section-type="product"] .variant-swatch__radio:checked + .variant-swatch__item {
+  border-color: #111111 !important;
+}
+
+/* Select dropdown fallback */
+[data-section-type="product"] .select-wrapper--primary {
+  border: 1.5px solid #cacacb !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   8. BOTÃO "ADICIONAR AO CARRINHO" — Estilo Nike
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .product-form__add-button,
+[data-section-type="product"] .product-form__payment-container .button--primary {
+  width: 100% !important;
+  background: #111111 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 30px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  padding: 0 24px !important;
+  line-height: 56px !important;
+  height: 56px !important;
+  cursor: pointer !important;
+  transition: opacity 0.2s ease !important;
+  margin-bottom: 12px !important;
+}
+
+[data-section-type="product"] .product-form__add-button:hover,
+[data-section-type="product"] .product-form__payment-container .button--primary:hover {
+  background: #111111 !important;
+  opacity: 0.8 !important;
+}
+
+/* Botão secundário (ex.: Adicionar ao carrinho adicional) */
+[data-section-type="product"] .button--primary-add {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: 1.5px solid #cacacb !important;
+  border-radius: 30px !important;
+}
+
+[data-section-type="product"] .button--primary-add:hover {
+  border-color: #111111 !important;
+  background: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Botão sold out */
+[data-section-type="product"] .button--disabled {
+  background: #e5e5e5 !important;
+  color: #707072 !important;
+  border-radius: 30px !important;
+  border: none !important;
+  cursor: not-allowed !important;
+}
+
+/* Shopify dynamic checkout buttons */
+[data-section-type="product"] .shopify-payment-button__button {
+  border-radius: 30px !important;
+  overflow: hidden !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   9. BOTÃO FLUTUANTE (STICKY BOTTOM BAR) — Nike
+   ═══════════════════════════════════════════════════════ */
+.botaoflutuante {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 999 !important;
+  background: #ffffff !important;
+  padding: 12px 20px !important;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08) !important;
+  border-top: 1px solid #e5e5e5 !important;
+}
+
+.botaoflutuante #clicar {
+  display: block !important;
+  width: 100% !important;
+  background: #111111 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 30px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  padding: 16px 24px !important;
+  text-align: center !important;
+  letter-spacing: 0 !important;
+  cursor: pointer !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   10. CARDS DE CONTEÚDO — Descrição, Tabs, etc.
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .card__title {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  color: #111111 !important;
+  text-transform: none !important;
+}
+
+[data-section-type="product"] .card__header {
+  padding: 20px 0 12px !important;
+  border: none !important;
+}
+
+[data-section-type="product"] .card__section {
+  padding: 0 !important;
+  border: none !important;
+}
+
+[data-section-type="product"] .card__collapsible-button {
+  padding: 20px 0 !important;
+  border-top: 1px solid #e5e5e5 !important;
+  border-bottom: none !important;
+  background: transparent !important;
+}
+
+[data-section-type="product"] .card__collapsible-content {
+  padding: 0 0 20px !important;
+}
+
+/* Expandable content */
+[data-section-type="product"] .expandable-content__toggle {
+  color: #111111 !important;
+  font-weight: 500 !important;
+  text-decoration: underline !important;
+  font-size: 14px !important;
+  margin-top: 8px !important;
+}
+
+/* Plus button */
+[data-section-type="product"] .plus-button {
+  border-color: #111111 !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   11. SEÇÃO DE FRETE — Clean
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .shipping-estimator .form__field--text {
+  border: 1.5px solid #cacacb !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-size: 14px !important;
+}
+
+[data-section-type="product"] .shipping-estimator .button {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: 1.5px solid #111111 !important;
+  border-radius: 30px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+}
+
+/* Frete customizado */
+[data-section-type="product"] .fretefundo {
+  border: 1px solid #e5e5e5 !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  margin-bottom: 16px !important;
+  background: #f5f5f5 !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   12. BADGES (Devolução, Garantia, Mais vendido)
+   ═══════════════════════════════════════════════════════ */
+#badges-product {
+  margin-top: 12px !important;
+}
+
+#badges-product .badge {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  padding: 8px 0 !important;
+  border: none !important;
+}
+
+#badges-product .badge-icon {
+  flex-shrink: 0 !important;
+  fill: #111111 !important;
+}
+
+#badges-product .text-badge {
+  font-size: 14px !important;
+  color: #707072 !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+
+#badges-product .highlight-text {
+  font-weight: 500 !important;
+  color: #111111 !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   13. PIX BADGE
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .product-form__info-content > span[style*="border-radius: 21px"] {
+  background: #f0f7ff !important;
+  border: 1px solid #0072c6 !important;
+  border-radius: 30px !important;
+  font-size: 13px !important;
+  color: #0072c6 !important;
+  padding: 6px 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-top: 12px !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   14. SEÇÃO DE PAGAMENTO / TRUST BADGES
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .payment-list {
+  gap: 8px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+[data-section-type="product"] .payment-list__item {
+  opacity: 0.7 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+[data-section-type="product"] .payment-list__item:hover {
+  opacity: 1 !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   15. RECOMMENDATIONS (Mais Vendidos)
+   ═══════════════════════════════════════════════════════ */
+.product-recommendations .section__title,
+.product-recommendations .heading {
+  font-size: 24px !important;
+  font-weight: 500 !important;
+  color: #111111 !important;
+  text-transform: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   16. QUANTIDADE SELECTOR — Clean
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .qty-align {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  border: 1.5px solid #cacacb !important;
+  border-radius: 30px !important;
+  overflow: hidden !important;
+  max-width: 140px !important;
+}
+
+[data-section-type="product"] .qtyminus,
+[data-section-type="product"] .qtyplus {
+  background: transparent !important;
+  border: none !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: #111111 !important;
+  width: 44px !important;
+  height: 44px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+[data-section-type="product"] .qty {
+  border: none !important;
+  text-align: center !important;
+  width: 44px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: #111111 !important;
+  background: transparent !important;
+}
+
+/* Olho / pessoas vendo o produto — mais sutil */
+[data-section-type="product"] .olho {
+  background: #4a8c1c !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   17. AVALIAÇÕES
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .spr-reviews,
+.lt-block-reviews,
+#Areviewsapp {
+  padding: 0 20px !important;
+}
+
+/* Estrelas — dourado padrão */
+[data-section-type="product"] .fas.fa-star {
+  color: #111111 !important;
+  font-size: 14px !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   18. WhatsApp Share Badge — mais sutil
+   ═══════════════════════════════════════════════════════ */
+.rc-share-badge {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: 1.5px solid #cacacb !important;
+  border-radius: 30px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  height: 44px !important;
+  padding: 0 20px !important;
+}
+
+.rc-share-badge:hover {
+  border-color: #111111 !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   19. MOBILE — Responsivo
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 999px) {
+  /* Stack vertical no mobile */
+  [data-section-type="product"] .product-block-list__item--gallery,
+  [data-section-type="product"] .product-block-list__item--info {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+    position: relative !important;
+    top: auto !important;
+  }
+
+  [data-section-type="product"] .product-block-list__item--info {
+    padding: 16px 20px 0 !important;
+  }
+
+  /* Título menor no mobile */
+  [data-section-type="product"] .product-meta__title {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Grid de tamanhos 4 colunas no mobile */
+  [data-section-type="product"] .block-swatch-list {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  [data-section-type="product"] .block-swatch__item {
+    min-height: 44px !important;
+    font-size: 14px !important;
+    padding: 6px 8px !important;
+  }
+
+  /* Botão ATC fullwidth no mobile */
+  [data-section-type="product"] .product-form__add-button {
+    height: 52px !important;
+    line-height: 52px !important;
+    font-size: 15px !important;
+  }
+
+  /* Padding geral */
+  [data-section-type="product"] .product-block-list__item--description,
+  [data-section-type="product"] .product-block-list__item--reviews,
+  [data-section-type="product"] .product-block-list__item--trust,
+  [data-section-type="product"] .product-block-list__item--shipping,
+  [data-section-type="product"] .product-block-list__item--content {
+    padding: 0 16px !important;
+  }
+
+  /* Sticky bar */
+  .botaoflutuante {
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .botaoflutuante #clicar {
+    font-size: 15px !important;
+    padding: 14px 20px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   20. ANIMAÇÕES SUTIS — Premium feel
+   ═══════════════════════════════════════════════════════ */
+[data-section-type="product"] .block-swatch__item,
+[data-section-type="product"] .color-swatch__item,
+[data-section-type="product"] .variant-swatch__item,
+[data-section-type="product"] .product-form__add-button,
+.botaoflutuante #clicar {
+  transition: all 0.15s ease !important;
+}
+
+/* Fix para garantir que bandeiras de pagamento ficam dentro do grid */
+[data-section-type="product"] .product__trust-badge {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Scrollbar sutil */
+[data-section-type="product"] .card--sticky::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+[data-section-type="product"] .card--sticky::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+[data-section-type="product"] .card--sticky::-webkit-scrollbar-thumb {
+  background: #cacacb !important;
+  border-radius: 4px !important;
+}
+
+/* Remove qualquer background extra */
+[data-section-type="product"] .product-form__payment-container {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Bandeiras de pagamento - área limpa */
+[data-section-type="product"] .product-block-list__item--trust .card__header--flex {
+  border-bottom: 1px solid #e5e5e5 !important;
+  padding-bottom: 16px !important;
+}
+
+/* Remoção de elementos visuais desnecessários para manter clean */
+[data-section-type="product"] .product-form__info-item--quantity.qty-margin-top {
+  margin-top: 12px !important;
+}
+</style>
