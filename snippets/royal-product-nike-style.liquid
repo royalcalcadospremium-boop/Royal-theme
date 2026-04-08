@@ -717,11 +717,56 @@
 .botaoflutuante #clicar {
   transition: all 0.15s ease !important;
 }
+
+/* ═══════════════════════════════════════════════════════
+   19. AVISO "SELECIONE UM TAMANHO"
+   ═══════════════════════════════════════════════════════ */
+.royal-size-warning {
+  color: #d32f2f !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  margin-top: 10px !important;
+  padding: 8px 0 !important;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  animation: royalShake 0.4s ease;
+}
+
+.royal-size-warning.is-visible {
+  display: flex !important;
+}
+
+.royal-size-warning svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  fill: #d32f2f;
+}
+
+/* Borda vermelha nos swatches quando erro */
+.royal-size-error .block-swatch__item {
+  border-color: #d32f2f !important;
+}
+
+.royal-size-error .block-swatch__radio:checked + .block-swatch__item {
+  border-color: #111111 !important;
+}
+
+@keyframes royalShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
 </style>
 
 <script>
 (function(){
   'use strict';
+
+  var hasUserSelectedSize = false;
 
   // ─── 1. Esconder botão flutuante quando raiz está visível ───
   function initFloatingToggle() {
@@ -754,7 +799,6 @@
     var wrapper = section.querySelector('.product-block-list__wrapper');
     if (!wrapper) return;
 
-    // Evita executar mais de uma vez
     if (document.getElementById('royal-variants-below-gallery')) return;
 
     var variants = section.querySelector('.product-form__variants');
@@ -762,11 +806,9 @@
 
     if (!variants && !paymentContainer) return;
 
-    // Cria container novo
     var container = document.createElement('div');
     container.id = 'royal-variants-below-gallery';
 
-    // Move os elementos (não clona — move de verdade)
     if (variants) {
       variants.parentNode.querySelector('.product-form__variants') && container.appendChild(variants);
     }
@@ -774,7 +816,6 @@
       container.appendChild(paymentContainer);
     }
 
-    // Insere no wrapper
     wrapper.appendChild(container);
   }
 
@@ -787,12 +828,131 @@
     });
   }
 
+  // ─── 4. Encontrar o option de "tamanho" ───
+  function getSizeOption() {
+    var sizeLabels = ['tamanho', 'size', 'tam', 'numero', 'número'];
+    var options = document.querySelectorAll('[data-section-type="product"] .product-form__option');
+    
+    for (var i = 0; i < options.length; i++) {
+      var label = options[i].querySelector('.product-form__option-name');
+      if (label) {
+        var text = label.textContent.toLowerCase().trim();
+        for (var j = 0; j < sizeLabels.length; j++) {
+          if (text.indexOf(sizeLabels[j]) !== -1) {
+            return options[i];
+          }
+        }
+      }
+    }
+    // Se só tem 1 option, assume que é tamanho
+    if (options.length === 1) return options[0];
+    return null;
+  }
+
+  // ─── 5. Criar aviso de tamanho ───
+  function createSizeWarning(sizeOption) {
+    if (!sizeOption) return null;
+    
+    // Verifica se já existe
+    var existing = sizeOption.querySelector('.royal-size-warning');
+    if (existing) return existing;
+
+    var warning = document.createElement('div');
+    warning.className = 'royal-size-warning';
+    warning.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg> Selecione um tamanho para continuar';
+    
+    // Insere após a lista de swatches
+    var swatchList = sizeOption.querySelector('.block-swatch-list, .color-swatch-list, .variant-swatch-list, .select-wrapper--primary');
+    if (swatchList) {
+      swatchList.parentNode.insertBefore(warning, swatchList.nextSibling);
+    } else {
+      sizeOption.appendChild(warning);
+    }
+    
+    return warning;
+  }
+
+  // ─── 6. Monitorar cliques nos tamanhos ───
+  function watchSizeSelection() {
+    var sizeOption = getSizeOption();
+    if (!sizeOption) return;
+
+    var radios = sizeOption.querySelectorAll('input[type="radio"], .block-swatch__radio, .color-swatch__radio, .variant-swatch__radio');
+    
+    radios.forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        hasUserSelectedSize = true;
+        
+        // Remove o aviso
+        var warning = sizeOption.querySelector('.royal-size-warning');
+        if (warning) warning.classList.remove('is-visible');
+        
+        // Remove borda vermelha
+        var swatchList = sizeOption.querySelector('.block-swatch-list, .color-swatch-list, .variant-swatch-list');
+        if (swatchList) swatchList.classList.remove('royal-size-error');
+      });
+    });
+
+    // Também ouço clicks nos labels (para garantir)
+    var labels = sizeOption.querySelectorAll('.block-swatch__item, .color-swatch__item, .variant-swatch__item');
+    labels.forEach(function(label) {
+      label.addEventListener('click', function() {
+        hasUserSelectedSize = true;
+        
+        var warning = sizeOption.querySelector('.royal-size-warning');
+        if (warning) warning.classList.remove('is-visible');
+        
+        var swatchList = sizeOption.querySelector('.block-swatch-list, .color-swatch-list, .variant-swatch-list');
+        if (swatchList) swatchList.classList.remove('royal-size-error');
+      });
+    });
+  }
+
+  // ─── 7. Validação no botão flutuante ───
+  function initFloatingValidation() {
+    var floatingBtn = document.getElementById('clicar');
+    if (!floatingBtn) return;
+
+    floatingBtn.addEventListener('click', function(e) {
+      var sizeOption = getSizeOption();
+      
+      // Se não há opção de tamanho ou já selecionou, segue normal
+      if (!sizeOption || hasUserSelectedSize) return;
+
+      // BLOQUEIA a ação
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+
+      // Mostra aviso
+      var warning = createSizeWarning(sizeOption);
+      if (warning) warning.classList.add('is-visible');
+
+      // Borda vermelha nos swatches
+      var swatchList = sizeOption.querySelector('.block-swatch-list, .color-swatch-list, .variant-swatch-list');
+      if (swatchList) swatchList.classList.add('royal-size-error');
+
+      // Scroll suave até os tamanhos
+      var scrollTarget = sizeOption;
+      var rect = scrollTarget.getBoundingClientRect();
+      var offsetTop = window.pageYOffset + rect.top - 100;
+      
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+
+    }, true); // true = capture phase para interceptar antes
+  }
+
   // ─── INIT ───
   function init() {
     setTimeout(function() {
       initFloatingToggle();
       moveVariantsBelowGallery();
       hideViewerCount();
+      watchSizeSelection();
+      initFloatingValidation();
     }, 300);
   }
 
